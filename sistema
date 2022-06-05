@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+	char email[40];
+	char senha[40];	
+} cadastro ;
+
+typedef struct{
+	char email_login[40];
+	char senha_login[40];
+	int numero;	
+} login;
+
+
+cadastro cadastrar();
+login logar();
+cadastro limparPessoa();
+
+
+
+int main(void){	
+	login conta1;
+	int i = 1, j = 0;
+	int n;
+	int login , escolha = 0;
+	int senha;
+	cadastro pessoas[100];
+	char close[5];
+	
+
+
+	
+	do{
+		printf("\n\tBem Vindo ao site de cadastro!\n");
+		printf("\n");
+		printf("opcao 1 : criar uma conta\n");
+		printf("opcao 2 : fazer login\n");
+		printf("opcao 3 : apagar sua conta\n");
+		printf("opcao 4 : sair\n");
+		printf("\ndigite o numero da sua escolha: ");
+		scanf("%d" , &escolha);
+		fflush (stdin);
+	
+	switch(escolha){
+	case 1:
+		printf("\n\tBem Vindo ao sistema de login!\n");
+		pessoas[j] = cadastrar();
+		system("cls");
+		printf("sua conta foi criada!\n");
+		printf("codigo da conta: %d\n", j);
+		j++;
+		break;
+	case 2:
+		conta1 = logar();
+		if (strcmp(conta1.email_login, pessoas[conta1.numero].email) == 0 && strcmp(conta1.senha_login, pessoas[conta1.numero].senha) == 0){
+			printf("voce realizou login com sucesso!\n");
+		}
+		else{
+			printf("sua senha ou seu email estao incorretos \n");
+		}
+	
+		i++;
+		break;
+	case 3:
+		system("cls");
+		printf("\n\tsistema de deletar conta\n");
+		printf("\ndigite a conta que deseja limpar: ");
+    	scanf("%d", &n);
+    	fflush(stdin);
+		pessoas[n] = limparPessoa();
+		system("cls");
+		printf("sua conta foi excluida!\n");
+		break;
+	case 4:
+		i = 0;
+		printf("\nPrograma finalizado!\n");
+		gets(close);
+		break;
+	default:
+		printf("Comando Invalido!");
+		break;
+	}
+}while(i!=0);
+return 0;
+}
+	cadastro cadastrar(){
+		cadastro pessoa1;
+			system("cls");
+			printf("\n\tsistema de cadastro\n");
+			printf("\ndigite o email que deseja cadastrar: ");
+    		fgets(pessoa1.email, 40, stdin);
+			printf("\ndigite a senha que deseja cadastrar: ");
+			fgets(pessoa1.senha, 40, stdin);
+			return pessoa1;
+			system("cls");
+	}
+	login logar(){
+		login conta1;
+		system("cls");
+			printf("\n\tsistema de login\n");
+			printf("\ndigite aqui o codigo do usuario: ");
+			scanf("%d", &conta1.numero);
+			fflush(stdin);
+			printf("\ndigite aqui o email da sua conta: ");
+			fgets(conta1.email_login, 40, stdin);
+			printf("\ndigite a senha da sua conta: ");
+			fgets(conta1.senha_login, 40, stdin);
+			system("cls");
+			
+			
+			return conta1;
+		}
+	cadastro limparPessoa(){
+		cadastro pessoa1;
+			strcpy(pessoa1.email, "");
+			strcpy(pessoa1.senha, "");
+			return pessoa1;
+}
